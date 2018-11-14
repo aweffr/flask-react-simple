@@ -1,0 +1,5 @@
+include *.md
+
+include create_flask_react_app/package.json
+
+recursive-include docs *.txt
