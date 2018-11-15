@@ -1,11 +1,12 @@
 include *.md
 
+recursive-include docs *.txt *.md
+
 include flask_reactjs/package.json
 include flask_reactjs/.babelrc
 include flask_reactjs/webpack.config.js
 
 recursive-include flask_reactjs/app/api *
-prune flask_reactjs/app/__pycache__/
 
 recursive-include flask_reactjs/app/static *
 
@@ -13,7 +14,8 @@ recursive-include flask_reactjs/app/templates *
 
 recursive-include flask_reactjs/src *
 
-prune flask_reactjs/node_modules/
-prune flask_reactjs/__pycache__/
-
-recursive-include docs *.txt
+prune flask_reactjs/node_modules
+prune flask_reactjs/__pycache__
+prune flask_reactjs/app/__pycache__
+prune flask_reactjs/app/api/__pycache__
+prune flask_reactjs/app/main/__pycache__
