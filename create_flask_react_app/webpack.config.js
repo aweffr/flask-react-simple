@@ -5,7 +5,8 @@ module.exports = {
   entry: {
     'index': path.resolve('src/', 'index.js')
   },
-  mode: "development", // or production
+  mode: "development", // development or production
+  devtool: "cheap-source-map",
   module: {
     rules: [
       {
@@ -13,7 +14,14 @@ module.exports = {
         exclude: /node_modules/,
         loader: "babel-loader",
         options: {
-          presets: ["@babel/env"], plugins: ["@babel/plugin-proposal-class-properties"]
+          presets: [
+            ["@babel/env", {"targets": "last 2 major versions"}]
+          ],
+          plugins: [
+            "@babel/plugin-proposal-class-properties",
+            "@babel/plugin-proposal-optional-chaining",
+            "@babel/plugin-syntax-dynamic-import"
+          ]
         }
       },
       {
@@ -30,6 +38,6 @@ module.exports = {
     publicPath: "/static/dist/",
 
     // the target directory for all output files
-    filename: "[name].bundle.js"
+    filename: "[name].bundle.js",
   }
 };
