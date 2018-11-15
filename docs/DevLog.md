@@ -8,7 +8,7 @@
 2. 让打包工具录入非python package文件:
     - include_package_data:  [Doc](https://setuptools.readthedocs.io/en/latest/setuptools.html#new-and-changed-setup-keywords)
         If set to True, this tells setuptools to automatically include any data files it finds inside your package directories that are specified by your MANIFEST.in file. For more information, see the section below on Including Data Files.
-        ```python
+        ```
         setup(
             ...,
             include_package_data=True
