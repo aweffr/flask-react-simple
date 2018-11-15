@@ -6,7 +6,7 @@ from setuptools import setup
 
 setup(
     name='flask-react-simple',
-    version='0.1.1b',
+    version='0.1.2',
     packages=['flask_reactjs'],
     license='LICENSE.txt',
     long_description=open('README.rst', encoding='utf-8').read(),

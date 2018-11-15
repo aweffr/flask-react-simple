@@ -1,10 +1,13 @@
+Version 0.1.2
+-------------
+Add class FlaskReact, functionality still need implement.
+
+
 Version 0.1.1
 -------------
-
 Improve the cli command.
 
 
 Version 0.1.0
 -------------
-
 Init Project.
