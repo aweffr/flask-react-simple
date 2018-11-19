@@ -191,3 +191,6 @@ dmypy.json
 
 # generated webpack config
 .webpack_config/
+
+# generated pages in meta_project
+/meta_project/public/pages/*

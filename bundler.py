@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # encoding=utf-8
 import os
+import re
 import tarfile
 import glob
 
@@ -20,6 +21,8 @@ black_list = [
 def need_exclude(filename):
     for name in black_list:
         if name in filename:
+            return True
+        if 'public' in filename and 'pages' in filename:
             return True
     return False
 

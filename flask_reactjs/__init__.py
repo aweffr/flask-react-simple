@@ -5,6 +5,8 @@ import subprocess
 from collections import defaultdict
 from glob import glob
 from time import sleep
+from os.path import join as pjoin
+import pathlib
 
 from shutil import rmtree
 
@@ -17,11 +19,18 @@ import jinja2
 class FlaskReact(object):
     def __init__(self, app=None):
         self.app = app
+        self.webpack = None
         if app is not None:
             self.init_app(app)
 
     def init_app(self, app):
         self.app = app
+        self.webpack = WebpackDevTask(app)
+
+    def run_webpack_watcher(self):
+        if self.webpack is None:
+            raise Exception('Cannot Find the App Instance!')
+        self.webpack.run()
 
     def inject_page_source(self):
         raise NotImplemented
@@ -43,6 +52,29 @@ class FlaskReact(object):
             return ctx.react['sources']
 
 
+index_js_template = """
+import {{ page_name }} from './{{ page_name }}';
+
+export default {{ page_name }};
+"""
+
+react_component_js_template = """
+import React, {Component, Fragment} from 'react';
+
+class {{ page_name }} extends Component {
+  render() {
+    return (
+      <div>
+        {{ page_name }} page
+      </div>
+    );
+  }
+}
+
+export default {{ page_name }};
+"""
+
+
 class WebpackDevTask(object):
 
     def __init__(self, app: Flask):
@@ -51,6 +83,26 @@ class WebpackDevTask(object):
         self.babel_target_env = app.config.get('BABEL_ENV_TARGET', '> 0.5%, last 2 versions, Firefox ESR, not dead')
 
         self.watch_dir = os.path.join(self.project_path, 'public')
+
+    def generate_page(self, page_name: str):
+        p = pathlib.Path(pjoin(self.project_path, 'public', 'pages', page_name))
+        p.mkdir(parents=True, exist_ok=True)
+
+        index_t = jinja2.Template(index_js_template)
+        component_t = jinja2.Template(react_component_js_template)
+
+        index_filename = p / 'index.js'
+        component_filename = p / (page_name.capitalize() + '.js')
+
+        if not os.path.exists(index_filename) and not os.path.exists(component_filename):
+            with open(index_filename, 'w') as f:
+                f.writelines(
+                    index_t.render(page_name=page_name.capitalize())
+                )
+            with open(component_filename, 'w') as f:
+                f.writelines(
+                    component_t.render(page_name=page_name.capitalize())
+                )
 
     def _iter_js_entries(self):
         """
@@ -193,3 +245,19 @@ module.exports = {
         print('cmd to run:', cmd)
 
         p = subprocess.call(cmd, shell=True, cwd=self.project_path)
+
+    def run(self):
+        _iter = self._iter_js_entries()
+
+        temp_webpack_dir = pathlib.Path(pjoin(self.project_path, '.webpack_config'))
+        temp_webpack_dir.mkdir(parents=True, exist_ok=True)
+
+        for batch in _iter:
+            configs = self.generate_webpack_config(batch)
+            for idx, config in enumerate(configs):
+                config_file = pjoin(temp_webpack_dir, 'webpack.config.%d.js' % idx)
+
+                with open(config_file, 'w') as f:
+                    f.writelines(config)
+
+                self._run_webpack_from_file(config_file)
