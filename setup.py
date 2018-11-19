@@ -1,12 +1,17 @@
 #!/usr/bin/env python
 # encoding=utf-8
 
+import sys
 
 from setuptools import setup
 
+if 'sdist' in sys.argv:
+    from bundler import bundler
+    bundler()
+
 setup(
     name='flask-react-simple',
-    version='0.1.2',
+    version='0.1.3',
     packages=['flask_reactjs'],
     license='LICENSE.txt',
     long_description=open('README.rst', encoding='utf-8').read(),

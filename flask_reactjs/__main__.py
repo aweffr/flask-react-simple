@@ -3,21 +3,14 @@
 
 import os, sys
 import click
-import shutil
 import subprocess
+import tarfile
 
 import flask_reactjs
 
 
-def _ignore(src, names):
-    names = [
-        n for n in names if '__pycache__' in src or '__pycache__' in n
-    ]
-    return names
-
-
 @click.command()
-@click.option('--install/--no-install', ' /-N', default=True)
+@click.option('--install/--no-install', '-I/-N', default=False)
 @click.argument('project_name')
 def create(project_name, install):
     cwd = os.getcwd()
@@ -30,7 +23,9 @@ def create(project_name, install):
 
     pkgdir = sys.modules['flask_reactjs'].__path__[0]
 
-    shutil.copytree(pkgdir, dirpath, ignore=_ignore)
+    tarf = tarfile.open(os.path.join(pkgdir, 'bundle.tar.gz'))
+
+    tarf.extractall(dirpath)
 
     if install:
         subprocess.call("yarn install", shell=True, cwd=dirpath)

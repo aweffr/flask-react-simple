@@ -3,7 +3,7 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: {
-    'index': path.resolve('src/', 'index.js')
+    'index': path.resolve('public/', 'index.js')
   },
   mode: "development", // development or production
   devtool: "cheap-source-map",
@@ -15,12 +15,13 @@ module.exports = {
         loader: "babel-loader",
         options: {
           presets: [
-            ["@babel/env", {"targets": "last 2 major versions"}]
+            ["@babel/env", {"targets": "last 2 major versions"}],
+            "@babel/preset-react"
           ],
           plugins: [
-            "@babel/plugin-proposal-class-properties",
+            ["@babel/plugin-proposal-class-properties", {loose: true}],
+            ["@babel/plugin-proposal-object-rest-spread", {useBuiltIns: true}],
             "@babel/plugin-proposal-optional-chaining",
-            "@babel/plugin-syntax-dynamic-import"
           ]
         }
       },

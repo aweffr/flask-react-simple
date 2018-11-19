@@ -2,15 +2,14 @@
 # encoding=utf-8
 
 from flask import Flask
-from ..config import get_config
 
 
 # Init flask_login, flask-sqlalchemy, pymongo, etc...
 
 
-def create_app(_id='dev'):
+def create_app(config_obj):
     app = Flask(__name__)
-    app.config.from_object(get_config(_id))
+    app.config.from_object(config_obj)
 
     # Region: XXX.init_app(app)
 

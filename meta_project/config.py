@@ -3,9 +3,12 @@
 import os
 import secrets
 
+PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
+
 
 class Config(object):
     ENV = 'production'
+    PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 
 class DevConfig(Config):

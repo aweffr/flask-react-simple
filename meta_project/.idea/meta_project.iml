@@ -4,11 +4,7 @@
     <option name="enabled" value="true" />
   </component>
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/create_flask_react_app/app/static/dist" />
-      <excludeFolder url="file://$MODULE_DIR$/meta_project" />
-      <excludeFolder url="file://$MODULE_DIR$/venv" />
-    </content>
+    <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
@@ -16,7 +12,7 @@
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/create_flask_react_app/app/templates" />
+        <option value="$MODULE_DIR$/app/templates" />
       </list>
     </option>
   </component>

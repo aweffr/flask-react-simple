@@ -189,3 +189,5 @@ dmypy.json
 # yarn.lock
 */yarn.lock
 
+# generated webpack config
+.webpack_config/
