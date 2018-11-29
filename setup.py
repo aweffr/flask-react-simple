@@ -12,14 +12,14 @@ if 'sdist' in sys.argv:
 
 setup(
     name='flask-react-simple',
-    version='0.1.5',
+    version='0.2.0',
     packages=['flask_reactjs'],
     license='LICENSE.txt',
     long_description=open('README.rst', encoding='utf-8').read(),
     author='aweffr',
     author_email='aweffr@foxmail.com',
     url='https://github.com/aweffr/flask-react-simple',
-    python_requires='>=3.6',
+    python_requires='>=3.6.0',
     include_package_data=True,  # specify data files to be included in your packages
     install_requires=[
         "flask>=1.0.2",

@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # encoding=utf-8
-import os, sys
+import os
+import sys
 import subprocess
 import click
 import tarfile
-import pathlib, shutil
+import pathlib
+import shutil
 
 
 @click.command()

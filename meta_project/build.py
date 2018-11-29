@@ -3,7 +3,8 @@
 import os
 import subprocess
 import tarfile
-import pathlib, shutil
+import pathlib
+import shutil
 from glob import glob
 
 P = pathlib.Path
@@ -22,12 +23,11 @@ def main():
     else:
         print("Build Task Failed!")
 
-    # ↓↓↓当./app存在时拷贝进去
-    # 1. 拷贝 build/index.html 到 app/templates
-    # 2. 拷贝 build/static/js 到 app/static/js
-    # 3. 拷贝 build/static/css 到 app/static/css
-    # 3. 拷贝 build/static/lib 到 app/static/lib
-    # 4. 拷贝 build/static/favicon.ico 到 app/static/favicon.ico
+    #  build/index.html -> app/templates/index.html
+    #  build/static/js -> app/static/js
+    #  build/static/css -> app/static/css
+    #  build/static/lib -> app/static/lib
+    #  build/static/favicon.ico -> app/static/favicon.ico
 
     p = pathlib.Path('./app')
     if not p.exists():
