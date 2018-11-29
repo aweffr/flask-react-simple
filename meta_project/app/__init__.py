@@ -3,19 +3,13 @@
 
 from flask import Flask
 
-from flask_reactjs import FlaskReact
-
 # Init flask_login, flask-sqlalchemy, pymongo, etc...
-
-react = FlaskReact()
-
 
 def create_app(config_obj):
     app = Flask(__name__)
     app.config.from_object(config_obj)
 
     # Region: XXX.init_app(app)
-    react.init_app(app)
 
     # Region: register_blueprint
     from .api import bp

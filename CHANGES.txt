@@ -1,3 +1,11 @@
+Version 0.1.5
+-------------
+After so many trails, I think that separating the frontend and backend is such a good thing.
+Also, facebook's create-react-app is so excellent that my re-invention cannot compete.
+
+So, the change is to embrace the create-react-app, just add some of my flavor of conventions.
+
+
 Version 0.1.2
 -------------
 Add class FlaskReact, functionality still need implement.

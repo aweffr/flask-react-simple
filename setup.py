@@ -12,7 +12,7 @@ if 'sdist' in sys.argv:
 
 setup(
     name='flask-react-simple',
-    version='0.1.4',
+    version='0.1.5',
     packages=['flask_reactjs'],
     license='LICENSE.txt',
     long_description=open('README.rst', encoding='utf-8').read(),
@@ -28,9 +28,6 @@ setup(
     entry_points={
         'console_scripts': [
             'cra = flask_reactjs:create'
-        ],
-        'flask.commands': [
-            "wp = flask_reactjs.webpack_cli:wp"
-        ],
+        ]
     }
 )

@@ -3,7 +3,7 @@
 
 from flask import jsonify
 from . import bp
-from .mock_data import Data
+from .data import Data
 
 
 @bp.route('/users')
